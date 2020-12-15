@@ -1,3 +1,5 @@
+<%@ page import="main.model.application.AtorApplication" %>
+<%@ page import="main.model.domain.Ator" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,11 +117,23 @@
             <th scope="col"> Nome </th>
           </tr>
         </thead>
-        <tbody id="tBody"></tbody>
+        <tbody id="tBody">
+          <%
+            for (Ator ator : AtorApplication.listar()) {
+              if (ator != null) {
+                out.print("<tr scope=\"row\">");
+                out.print("<th>" + ator.getId() + "</th>");
+                out.print("<td>" + ator.getNome() + "</td>");
+                out.print("</tr>");
+              }
+            }
+//            AtorApplication.listar().forEach(ator -> out.print(ator.getNome()));
+          %>
+        </tbody>
+
       </table>
     </div>
-  </div>
-  
+
   <script
     src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

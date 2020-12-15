@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AtorApplication {
 
     public static Ator salvar(Ator ator) {
@@ -26,23 +29,28 @@ public class AtorApplication {
         return ator;
     }
 
-    public static void excluir(Long idAtor) throws Exception {
+    public static void excluir(Long idAtor) {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
 
-//        try {
         Transaction t = session.beginTransaction();
         Ator ator = session.get(Ator.class, idAtor);
         session.delete(ator);
         t.commit();
 
+        session.close();
+    }
 
-//        }
-//        catch (Exception he) {
+    public static List<Ator> listar() {
+        SessionFactory sessions =  HibernateUtil.getSessionFactory();
+        Session session = sessions.openSession();
 
-//        } finally {
-            session.close();
-//        }
+        Transaction t = session.beginTransaction();
+        List<Ator> atores = (List<Ator>) session.createQuery("from Ator").stream().distinct().collect(Collectors.toList());
+        t.commit();
+
+        session.close();
+        return atores;
     }
 
 }
