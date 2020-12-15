@@ -44,11 +44,7 @@ public class AtorApplication {
     public static List<Ator> listar() {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
-
-        Transaction t = session.beginTransaction();
         List<Ator> atores = (List<Ator>) session.createQuery("from Ator").stream().distinct().collect(Collectors.toList());
-        t.commit();
-
         session.close();
         return atores;
     }

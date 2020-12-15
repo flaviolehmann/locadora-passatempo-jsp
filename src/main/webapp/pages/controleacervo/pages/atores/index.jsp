@@ -81,6 +81,7 @@
                   id="btnFind"
                   class="btn btn-warning"
                   type="button"
+                  disabled
           >
             ENCONTRAR
           </button>
@@ -117,7 +118,7 @@
             <th scope="col"> Nome </th>
           </tr>
         </thead>
-        <tbody id="tBody">
+        <tbody>
           <%
             for (Ator ator : AtorApplication.listar()) {
               if (ator != null) {
@@ -127,7 +128,6 @@
                 out.print("</tr>");
               }
             }
-//            AtorApplication.listar().forEach(ator -> out.print(ator.getNome()));
           %>
         </tbody>
 

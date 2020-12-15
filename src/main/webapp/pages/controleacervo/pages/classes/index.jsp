@@ -1,3 +1,5 @@
+<%@ page import="main.model.domain.Classe" %>
+<%@ page import="main.model.application.ClasseApplication" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +119,7 @@
             id="btnExcluir"
             class="btn btn-danger"
             type="button"
+            disabled
           >
             EXCLUIR
           </button>
@@ -124,6 +127,7 @@
             id="btnFind"
             class="btn btn-warning"
             type="button"
+            disabled
           >
             ENCONTRAR
           </button>
@@ -151,7 +155,20 @@
             <th scope="col"> Prazo Devolução </th>
           </tr>
         </thead>
-        <tbody id="tBody"></tbody>
+        <tbody>
+          <%
+            for (Classe classe : ClasseApplication.listar()) {
+              if (classe != null) {
+                out.print("<tr scope=\"row\">");
+                out.print("<th>" + classe.getId() + "</th>");
+                out.print("<td>" + classe.getNome() + "</td>");
+                out.print("<th>" + classe.getValor() + "</th>");
+                out.print("<td>" + classe.getDias() + "</td>");
+                out.print("</tr>");
+              }
+            }
+          %>
+        </tbody>
       </table>
     </div>
   </div>
