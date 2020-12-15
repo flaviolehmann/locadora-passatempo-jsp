@@ -34,7 +34,7 @@ public enum TituloControllerStrategy {
             titulo.setCategoria(req.getParameter("categoriaTitulo"));
             titulo.setClasse(ClasseApplication.encontrar(Long.parseLong(req.getParameter("idClasseTitulo"))));
             titulo.setDiretor(DiretorApplication.encontrar(Long.parseLong(req.getParameter("idDiretorTitulo"))));
-            titulo.setCategoria(req.getParameter("sinopseTitulo"));
+            titulo.setSinopse(req.getParameter("sinopseTitulo"));
             titulo.setAtores(AtorApplication.encontrarVarios(FuncoesUtil.getIdListFromStrArray(req.getParameterValues("idAtoresTitulo"))));
 
             return titulo;
@@ -44,15 +44,15 @@ public enum TituloControllerStrategy {
     EXCLUIR {
         @Override
         public void tratarRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            Long idAtor = Long.parseLong(req.getParameter("idAtor"));
+            Long idTitulo = Long.parseLong(req.getParameter("idTitulo"));
             try {
-                AtorApplication.excluir(idAtor);
-                String successMessage = "Ator com identificador " + idAtor + " excluido com sucesso!";
-                resp.sendRedirect("./pages/controleacervo/pages/atores/index.jsp?msgSucesso=" + successMessage);
+                TituloApplication.excluir(idTitulo);
+                String successMessage = "Titulo com identificador " + idTitulo + " excluido com sucesso!";
+                resp.sendRedirect("./pages/controleacervo/pages/titulos/index.jsp?msgSucesso=" + successMessage);
             }
             catch (Exception exception) {
-                String errorMessage = "Erro ao excluir ator. Verifique o id inserido e tente novamente.";
-                resp.sendRedirect("./pages/controleacervo/pages/atores/index.jsp?msgError=" + errorMessage);
+                String errorMessage = "Erro ao excluir titulo. Verifique o id inserido e tente novamente.";
+                resp.sendRedirect("./pages/controleacervo/pages/titulos/index.jsp?msgError=" + errorMessage);
             }
         }
     };

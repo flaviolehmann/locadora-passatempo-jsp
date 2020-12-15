@@ -29,24 +29,24 @@ public class TituloApplication {
         return titulo;
     }
 
-    public static void excluir(Long idAtor) {
+    public static void excluir(Long idTitulo) {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
 
         Transaction t = session.beginTransaction();
-        Ator ator = session.get(Ator.class, idAtor);
-        session.delete(ator);
+        Titulo titulo = session.get(Titulo.class, idTitulo);
+        session.delete(titulo);
         t.commit();
 
         session.close();
     }
 
-    public static List<Ator> listar() {
+    public static List<Titulo> listar() {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
-        List<Ator> atores = (List<Ator>) session.createQuery("from Ator").stream().distinct().collect(Collectors.toList());
+        List<Titulo> titulos = (List<Titulo>) session.createQuery("from Titulo").stream().distinct().collect(Collectors.toList());
         session.close();
-        return atores;
+        return titulos;
     }
 
 }

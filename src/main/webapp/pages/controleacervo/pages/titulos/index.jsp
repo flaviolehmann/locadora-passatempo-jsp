@@ -4,6 +4,8 @@
 <%@ page import="main.model.application.ClasseApplication" %>
 <%@ page import="main.model.application.AtorApplication" %>
 <%@ page import="main.model.domain.Ator" %>
+<%@ page import="main.model.domain.Titulo" %>
+<%@ page import="main.model.application.TituloApplication" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,6 +92,7 @@
                 class="form-control"
                 placeholder="Ano"
                 aria-label="Ano"
+                type="number"
               >
             </div>
           </div>
@@ -198,9 +201,9 @@
     <hr>
     <div class="container">
       <form method="get" action="../../../../titulos" class="justify-content-end d-flex">
-        <input type="hidden" name="operacao" value="excluir">
+        <input type="hidden" name="operacao" value="encontrar">
         <div class="input-group mb-3" style="max-width: 300px">
-          <input type="number" name="idAtor" class="form-control" placeholder="001">
+          <input type="number" name="idTitulo" class="form-control" placeholder="001">
           <button type="submit" class="btn btn-warning"> ENCONTRAR </button>
         </div>
       </form>
@@ -209,9 +212,9 @@
 
     <div class="container">
       <form method="get" action="../../../../titulos" class="justify-content-end d-flex">
-        <input type="hidden" name="operacao" value="encontrar">
+        <input type="hidden" name="operacao" value="excluir">
         <div class="input-group mb-3" style="max-width: 300px">
-          <input type="number" name="idAtor" class="form-control" placeholder="001">
+          <input type="number" name="idTitulo" class="form-control" placeholder="001">
           <button type="submit" class="btn btn-danger"> EXCLUIR </button>
         </div>
       </form>
@@ -228,7 +231,20 @@
             <th scope="col"> Categoria </th>
           </tr>
         </thead>
-        <tbody id="tBody"></tbody>
+        <tbody>
+          <%
+            for (Titulo titulo : TituloApplication.listar()) {
+              if (titulo != null) {
+                out.print("<tr scope=\"row\">");
+                out.print("<th>" + titulo.getId() + "</th>");
+                out.print("<td>" + titulo.getNome() + "</td>");
+                out.print("<td>" + titulo.getAno() + "</td>");
+                out.print("<td>" + titulo.getCategoria() + "</td>");
+                out.print("</tr>");
+              }
+            }
+          %>
+        </tbody>
       </table>
     </div>
   </div>
