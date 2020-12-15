@@ -35,6 +35,8 @@ public class TituloApplication {
 
         Transaction t = session.beginTransaction();
         Titulo titulo = session.get(Titulo.class, idTitulo);
+        titulo.getAtores().clear();
+        session.save(titulo);
         session.delete(titulo);
         t.commit();
 
@@ -47,6 +49,14 @@ public class TituloApplication {
         List<Titulo> titulos = (List<Titulo>) session.createQuery("from Titulo").stream().distinct().collect(Collectors.toList());
         session.close();
         return titulos;
+    }
+
+    public static Titulo encontrar(Long idTitulo) {
+        SessionFactory sessions =  HibernateUtil.getSessionFactory();
+        Session session = sessions.openSession();
+        List<Titulo> titulos = (List<Titulo>) session.createQuery("from Titulo where id = " + idTitulo).stream().distinct().collect(Collectors.toList());
+        session.close();
+        return titulos.stream().findAny().orElse(null);
     }
 
 }

@@ -42,6 +42,12 @@
   <div class="container">
     <h3> Títulos </h3>
     <%
+      Titulo tituloBanco = null;
+      String idTitulo = request.getParameter("idTitulo");
+      if (idTitulo != null) {
+        tituloBanco = TituloApplication.encontrar(Long.parseLong(idTitulo));
+      }
+
       String mensagemDeSucesso = request.getParameter("msgSucesso");
       if (mensagemDeSucesso != null) {
         out.print("<div class=\"alert alert-success\" role=\"alert\">" + mensagemDeSucesso + "</div>");
@@ -63,6 +69,8 @@
               <input
                 id="inputId"
                 name="idTitulo"
+                disabled
+                value="<%= tituloBanco != null ? tituloBanco.getId() : "" %>"
                 type="text"
                 class="form-control"
                 placeholder="Id"
@@ -74,6 +82,7 @@
             <div class="input-group mb-3">
               <input
                 id="inputNome"
+                value="<%= tituloBanco != null ? tituloBanco.getNome() : "" %>"
                 name="nomeTitulo"
                 type="text"
                 class="form-control"
@@ -89,6 +98,7 @@
               <input
                 id="inputAno"
                 name="anoTitulo"
+                value="<%= tituloBanco != null ? tituloBanco.getAno() : "" %>"
                 class="form-control"
                 placeholder="Ano"
                 aria-label="Ano"
@@ -101,6 +111,7 @@
               <input
                 id="inputCategoria"
                 name="categoriaTitulo"
+                value="<%= tituloBanco != null ? tituloBanco.getCategoria() : "" %>"
                 class="form-control"
                 placeholder="Categoria"
                 aria-label="Categoria"
@@ -118,7 +129,11 @@
                 <%
                   for (Diretor diretor : DiretorApplication.listar()) {
                     if (diretor != null) {
-                      out.print("<option value=\"" + diretor.getId() + "\">" + diretor.getNome() + "</option>");
+                      boolean isEqual = false;
+                      if (tituloBanco != null) {
+                        isEqual = diretor.getId().equals(tituloBanco.getDiretor().getId());
+                      }
+                      out.print("<option " + (isEqual ? "selected" : "") + " value=\"" + diretor.getId() + "\">" + diretor.getNome() + "</option>");
                     }
                   }
                 %>
@@ -134,7 +149,11 @@
                 <%
                   for (Classe classe : ClasseApplication.listar()) {
                     if (classe != null) {
-                      out.print("<option value=\"" + classe.getId() + "\">" + classe.getNome() + "</option>");
+                      boolean isEqual = false;
+                      if (tituloBanco != null) {
+                        isEqual = classe.getId().equals(tituloBanco.getClasse().getId());
+                      }
+                      out.print("<option " + (isEqual ? "selected" : "") + " value=\"" + classe.getId() + "\">" + classe.getNome() + "</option>");
                     }
                   }
                 %>
@@ -151,7 +170,7 @@
                 name="sinopseTitulo"
                 aria-label="Sinopse"
                 placeholder="Sinopse"
-              ></textarea>
+              ><%= tituloBanco != null ? tituloBanco.getSinopse() : "" %></textarea>
             </div>
           </div>
         </div>
@@ -170,7 +189,16 @@
                 <%
                   for (Ator ator : AtorApplication.listar()) {
                     if (ator != null) {
-                      out.print("<option value=\"" + ator.getId() + "\">" + ator.getNome() + "</option>");
+                      boolean isEqual = false;
+                      if (tituloBanco != null) {
+                        for (Ator atorDoTitulo : tituloBanco.getAtores()) {
+                          if (ator.getId().equals(atorDoTitulo.getId())) {
+                            isEqual = true;
+                            break;
+                          }
+                        }
+                      }
+                      out.print("<option " + (isEqual ? "selected" : "") + " value=\"" + ator.getId() + "\">" + ator.getNome() + "</option>");
                     }
                   }
                 %>
@@ -200,10 +228,11 @@
     </form>
     <hr>
     <div class="container">
-      <form method="get" action="../../../../titulos" class="justify-content-end d-flex">
+      <form method="get" action="." class="justify-content-end d-flex">
         <input type="hidden" name="operacao" value="encontrar">
         <div class="input-group mb-3" style="max-width: 300px">
-          <input type="number" name="idTitulo" class="form-control" placeholder="001">
+          <input type="number" name="idTitulo" required class="form-control"
+                 placeholder="001" value="<%= tituloBanco != null ? tituloBanco.getId() : "" %>">
           <button type="submit" class="btn btn-warning"> ENCONTRAR </button>
         </div>
       </form>
@@ -214,7 +243,7 @@
       <form method="get" action="../../../../titulos" class="justify-content-end d-flex">
         <input type="hidden" name="operacao" value="excluir">
         <div class="input-group mb-3" style="max-width: 300px">
-          <input type="number" name="idTitulo" class="form-control" placeholder="001">
+          <input type="number" name="idTitulo" required class="form-control" placeholder="001">
           <button type="submit" class="btn btn-danger"> EXCLUIR </button>
         </div>
       </form>
