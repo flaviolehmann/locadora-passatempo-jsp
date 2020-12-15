@@ -1,3 +1,5 @@
+<%@ page import="main.model.domain.Diretor" %>
+<%@ page import="main.model.application.DiretorApplication" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,6 +78,7 @@
             id="btnExcluir"
             class="btn btn-danger"
             type="button"
+            disabled
           >
             EXCLUIR
           </button>
@@ -83,6 +86,7 @@
             id="btnFind"
             class="btn btn-warning"
             type="button"
+            disabled
           >
             ENCONTRAR
           </button>
@@ -108,7 +112,18 @@
             <th scope="col"> Nome </th>
           </tr>
         </thead>
-        <tbody id="tBody"></tbody>
+        <tbody>
+          <%
+            for (Diretor ator : DiretorApplication.listar()) {
+              if (ator != null) {
+                out.print("<tr scope=\"row\">");
+                out.print("<th>" + ator.getId() + "</th>");
+                out.print("<td>" + ator.getNome() + "</td>");
+                out.print("</tr>");
+              }
+            }
+          %>
+        </tbody>
       </table>
     </div>
   </div>
