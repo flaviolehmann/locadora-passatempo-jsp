@@ -27,7 +27,7 @@
       <h3> <a href="../classes/index.jsp"> CLASSES </a> </h3>
       <h3> <a href="../diretores/index.jsp"> DIRETORES </a> </h3>
       <h3> <a href="../items/index.html"> ITEMS </a> </h3>
-      <h3> <a href="../titulos/index.html"> TITULOS </a> </h3>
+      <h3> <a href="../titulos/index.jsp"> TITULOS </a> </h3>
     </div>
     <hr>
   </header>

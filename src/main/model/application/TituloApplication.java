@@ -1,6 +1,7 @@
 package main.model.application;
 
 import main.model.domain.Ator;
+import main.model.domain.Titulo;
 import main.model.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,15 +10,14 @@ import org.hibernate.Transaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AtorApplication {
+public class TituloApplication {
 
-    public static Ator salvar(Ator ator) {
-        SessionFactory sessions =  HibernateUtil.getSessionFactory();
-        Session session = sessions.openSession();
+    public static Titulo salvar(Titulo titulo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
             Transaction t = session.beginTransaction();
-            session.save(ator);
+            session.save(titulo);
             t.commit();
         }
         catch (Exception he) {
@@ -26,7 +26,7 @@ public class AtorApplication {
         finally {
             session.close();
         }
-        return ator;
+        return titulo;
     }
 
     public static void excluir(Long idAtor) {
@@ -45,15 +45,6 @@ public class AtorApplication {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
         List<Ator> atores = (List<Ator>) session.createQuery("from Ator").stream().distinct().collect(Collectors.toList());
-        session.close();
-        return atores;
-    }
-
-    public static List<Ator> encontrarVarios(List<Long> idAtores) {
-        SessionFactory sessions =  HibernateUtil.getSessionFactory();
-        Session session = sessions.openSession();
-        List<Ator> atores = (List<Ator>) session.createQuery("from Ator where id in :idAtores")
-                .setParameter("idAtores", idAtores).stream().distinct().collect(Collectors.toList());
         session.close();
         return atores;
     }

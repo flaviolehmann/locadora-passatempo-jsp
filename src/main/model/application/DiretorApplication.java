@@ -37,4 +37,13 @@ public class DiretorApplication {
         session.close();
         return diretores;
     }
+
+    public static Diretor encontrar(Long idDiretor) {
+        SessionFactory sessions =  HibernateUtil.getSessionFactory();
+        Session session = sessions.openSession();
+        List<Diretor> diretores = (List<Diretor>) session.createQuery("from Diretor where id = " + idDiretor)
+                .stream().distinct().collect(Collectors.toList());
+        session.close();
+        return diretores.stream().findFirst().orElse(null);
+    }
 }

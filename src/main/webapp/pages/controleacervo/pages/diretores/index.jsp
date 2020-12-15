@@ -28,7 +28,7 @@
       <h3> <a href="../classes/index.jsp"> CLASSES </a> </h3>
       <h3> <a href="../diretores/index.jsp"> DIRETORES </a> </h3>
       <h3> <a href="../items/index.html"> ITEMS </a> </h3>
-      <h3> <a href="../titulos/index.html"> TITULOS </a> </h3>
+      <h3> <a href="../titulos/index.jsp"> TITULOS </a> </h3>
     </div>
     <hr>
   </header>
@@ -114,11 +114,11 @@
         </thead>
         <tbody>
           <%
-            for (Diretor ator : DiretorApplication.listar()) {
-              if (ator != null) {
+            for (Diretor diretor : DiretorApplication.listar()) {
+              if (diretor != null) {
                 out.print("<tr scope=\"row\">");
-                out.print("<th>" + ator.getId() + "</th>");
-                out.print("<td>" + ator.getNome() + "</td>");
+                out.print("<th>" + diretor.getId() + "</th>");
+                out.print("<td>" + diretor.getNome() + "</td>");
                 out.print("</tr>");
               }
             }

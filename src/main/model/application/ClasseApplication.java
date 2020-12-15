@@ -27,8 +27,18 @@ public class ClasseApplication {
     public static List<Classe> listar() {
         SessionFactory sessions =  HibernateUtil.getSessionFactory();
         Session session = sessions.openSession();
-        List<Classe> classes = (List<Classe>) session.createQuery("from Classe").stream().distinct().collect(Collectors.toList());
+        List<Classe> classes = (List<Classe>) session.createQuery("from Classe")
+                .stream().distinct().collect(Collectors.toList());
         session.close();
         return classes;
+    }
+
+    public static Classe encontrar(Long id) {
+        SessionFactory sessions =  HibernateUtil.getSessionFactory();
+        Session session = sessions.openSession();
+        List<Classe> classes = (List<Classe>) session.createQuery("from Classe where id = " + id)
+                .stream().distinct().collect(Collectors.toList());
+        session.close();
+        return classes.stream().findFirst().orElse(null);
     }
 }
