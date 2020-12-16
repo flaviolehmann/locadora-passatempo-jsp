@@ -17,7 +17,21 @@ public class TituloApplication {
 
         try {
             Transaction t = session.beginTransaction();
-            session.save(titulo);
+
+            Titulo tituloNoBanco = encontrar(titulo.getId());
+            if (tituloNoBanco != null) {
+                tituloNoBanco.setSinopse(titulo.getSinopse());
+                tituloNoBanco.setDiretor(titulo.getDiretor());
+                tituloNoBanco.setNome(titulo.getNome());
+                tituloNoBanco.setAno(titulo.getAno());
+                tituloNoBanco.setClasse(titulo.getClasse());
+                tituloNoBanco.setCategoria(titulo.getCategoria());
+                tituloNoBanco.setAtores(titulo.getAtores());
+                session.merge(tituloNoBanco);
+            }
+            else {
+                session.save(titulo);
+            }
             t.commit();
         }
         catch (Exception he) {

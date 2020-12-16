@@ -69,7 +69,6 @@
               <input
                 id="inputId"
                 name="idTitulo"
-                disabled
                 value="<%= tituloBanco != null ? tituloBanco.getId() : "" %>"
                 type="text"
                 class="form-control"

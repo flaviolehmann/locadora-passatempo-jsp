@@ -23,12 +23,13 @@ public enum TituloControllerStrategy {
         public void tratarRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
             Titulo titulo = getTituloFromReqParams(req);
             TituloApplication.salvar(titulo);
-            String successMessage = "Titulo " + titulo.getNome() + " cadastrado com sucesso!";
+            String successMessage = "Titulo " + titulo.getNome() + " salvo com sucesso!";
             resp.sendRedirect("./pages/controleacervo/pages/titulos/index.jsp?msgSucesso=" + successMessage);
         }
 
         private Titulo getTituloFromReqParams(HttpServletRequest req) {
             Titulo titulo = new Titulo();
+            titulo.setId(getIdTitulo(req.getParameter("idTitulo")));
             titulo.setNome(req.getParameter("nomeTitulo"));
             titulo.setAno(Long.parseLong(req.getParameter("anoTitulo")));
             titulo.setCategoria(req.getParameter("categoriaTitulo"));
@@ -38,6 +39,10 @@ public enum TituloControllerStrategy {
             titulo.setAtores(AtorApplication.encontrarVarios(FuncoesUtil.getIdListFromStrArray(req.getParameterValues("idAtoresTitulo"))));
 
             return titulo;
+        }
+
+        private Long getIdTitulo(String idTitulo) {
+            return (idTitulo != null && !idTitulo.isEmpty()) ? Long.parseLong(idTitulo) : null;
         }
     },
 
