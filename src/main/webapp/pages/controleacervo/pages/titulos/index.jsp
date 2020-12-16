@@ -228,7 +228,6 @@
     <hr>
     <div class="container">
       <form method="get" action="." class="justify-content-end d-flex">
-        <input type="hidden" name="operacao" value="encontrar">
         <div class="input-group mb-3" style="max-width: 300px">
           <input type="number" name="idTitulo" required class="form-control"
                  placeholder="001" value="<%= tituloBanco != null ? tituloBanco.getId() : "" %>">

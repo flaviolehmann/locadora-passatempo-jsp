@@ -103,7 +103,7 @@
     <form method="get" action="../../../../atores" class="justify-content-end d-flex">
       <input type="hidden" name="operacao" value="excluir">
       <div class="input-group mb-3" style="max-width: 300px">
-        <input type="number" name="idAtor" class="form-control" placeholder="001">
+        <input type="number" name="idAtor" class="form-control" placeholder="001" required>
         <button type="submit" class="btn btn-danger"> Excluir </button>
       </div>
     </form>
