@@ -23,7 +23,7 @@ public class HibernateUtil {
 
                 Properties settings = new Properties();
                 settings.put(AvailableSettings.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(AvailableSettings.URL, "jdbc:mysql://localhost:3306/banco?useSSL=false");
+                settings.put(AvailableSettings.URL, "jdbc:mysql://localhost:3306/banco?useSSL=false&allowPublicKeyRetrieval=true");
                 settings.put(AvailableSettings.USER, "root");
                 settings.put(AvailableSettings.PASS, "root");
                 settings.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
