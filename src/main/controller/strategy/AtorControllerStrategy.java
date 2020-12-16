@@ -2,6 +2,7 @@ package main.controller.strategy;
 
 import main.model.application.AtorApplication;
 import main.model.domain.Ator;
+import main.model.util.FuncoesUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public enum AtorControllerStrategy {
     EXCLUIR {
         @Override
         public void tratarRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            Long idAtor = Long.parseLong(req.getParameter("idAtor"));
+            Long idAtor = FuncoesUtil.getLongFromRequestParam(req, "idAtor");
             try {
                 AtorApplication.excluir(idAtor);
                 String successMessage = "Ator com identificador " + idAtor + " excluido com sucesso!";

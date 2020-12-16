@@ -1,5 +1,6 @@
 package main.model.util;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,5 +12,10 @@ public class FuncoesUtil {
 
     public static List<Long> getIdListFromStrArray(String[] ids) {
         return Arrays.stream(ids).map(Long::parseLong).collect(Collectors.toList());
+    }
+
+    public static Long getLongFromRequestParam(HttpServletRequest request, String parameterName) {
+        String parameterValue = request.getParameter(parameterName);
+        return parameterValue != null && !parameterValue.isEmpty() ? Long.parseLong(parameterValue) : null;
     }
 }

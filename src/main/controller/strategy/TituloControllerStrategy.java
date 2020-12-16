@@ -24,27 +24,23 @@ public enum TituloControllerStrategy {
 
         private Titulo getTituloFromReqParams(HttpServletRequest req) {
             Titulo titulo = new Titulo();
-            titulo.setId(getIdTitulo(req.getParameter("idTitulo")));
+            titulo.setId(FuncoesUtil.getLongFromRequestParam(req, "idTitulo"));
             titulo.setNome(req.getParameter("nomeTitulo"));
-            titulo.setAno(Long.parseLong(req.getParameter("anoTitulo")));
+            titulo.setAno(FuncoesUtil.getLongFromRequestParam(req, "anoTitulo"));
             titulo.setCategoria(req.getParameter("categoriaTitulo"));
-            titulo.setClasse(ClasseApplication.encontrar(Long.parseLong(req.getParameter("idClasseTitulo"))));
-            titulo.setDiretor(DiretorApplication.encontrar(Long.parseLong(req.getParameter("idDiretorTitulo"))));
+            titulo.setClasse(ClasseApplication.encontrar(FuncoesUtil.getLongFromRequestParam(req, "idClasseTitulo")));
+            titulo.setDiretor(DiretorApplication.encontrar(FuncoesUtil.getLongFromRequestParam(req, "idDiretorTitulo")));
             titulo.setSinopse(req.getParameter("sinopseTitulo"));
             titulo.setAtores(AtorApplication.encontrarVarios(FuncoesUtil.getIdListFromStrArray(req.getParameterValues("idAtoresTitulo"))));
 
             return titulo;
-        }
-
-        private Long getIdTitulo(String idTitulo) {
-            return (idTitulo != null && !idTitulo.isEmpty()) ? Long.parseLong(idTitulo) : null;
         }
     },
 
     EXCLUIR {
         @Override
         public void tratarRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            Long idTitulo = Long.parseLong(req.getParameter("idTitulo"));
+            Long idTitulo = FuncoesUtil.getLongFromRequestParam(req, "idTitulo");
             try {
                 TituloApplication.excluir(idTitulo);
                 String successMessage = "Titulo com identificador " + idTitulo + " excluido com sucesso!";
