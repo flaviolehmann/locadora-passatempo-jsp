@@ -1,14 +1,7 @@
 package main.controller;
 
-import main.controller.strategy.AtorControllerStrategy;
 import main.controller.strategy.DiretorControllerStrategy;
-import main.model.domain.Diretor;
-import main.model.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

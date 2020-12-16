@@ -1,11 +1,11 @@
-<%@ page import="main.model.domain.Diretor" %>
-<%@ page import="main.model.application.DiretorApplication" %>
-<%@ page import="main.model.domain.Classe" %>
-<%@ page import="main.model.application.ClasseApplication" %>
 <%@ page import="main.model.application.AtorApplication" %>
-<%@ page import="main.model.domain.Ator" %>
-<%@ page import="main.model.domain.Titulo" %>
+<%@ page import="main.model.application.ClasseApplication" %>
+<%@ page import="main.model.application.DiretorApplication" %>
 <%@ page import="main.model.application.TituloApplication" %>
+<%@ page import="main.model.domain.Ator" %>
+<%@ page import="main.model.domain.Classe" %>
+<%@ page import="main.model.domain.Diretor" %>
+<%@ page import="main.model.domain.Titulo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

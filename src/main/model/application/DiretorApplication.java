@@ -1,6 +1,5 @@
 package main.model.application;
 
-import main.model.domain.Ator;
 import main.model.domain.Diretor;
 import main.model.util.HibernateUtil;
 import org.hibernate.Session;

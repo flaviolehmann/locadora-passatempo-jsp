@@ -1,6 +1,5 @@
 package main.controller;
 
-import main.controller.strategy.AtorControllerStrategy;
 import main.controller.strategy.ClasseControllerStrategy;
 
 import javax.servlet.annotation.WebServlet;
